@@ -12,6 +12,7 @@ def flatten_study(study):
         new_dict["phases"] = ", ".join(phases)
     else:
         new_dict["phases"] = None
+    new_dict["study_type"] = study["protocolSection"]["designModule"]["studyType"]
     new_dict["startdate"] = study["protocolSection"]["statusModule"].get("startDateStruct",{}).get("date")
     new_dict["why_stopped"] = study["protocolSection"]["statusModule"].get("whyStopped")
     new_dict["enrollment"] = study["protocolSection"]["designModule"].get("enrollmentInfo",{}).get("count")
