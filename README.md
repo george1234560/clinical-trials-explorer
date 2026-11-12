@@ -26,6 +26,18 @@ Efficacy grows as a reason from Phase 1 to Phase 3, where it's the most common n
 
 More charts: [status of all trials](figures/01_status.png) and [trials per phase](figures/02_phases.png).
 
+## Fixes: stricter termination rates
+Originally I calculated termination rates over every registered trial, including ones that are still running and haven't had the chance to stop yet. In `07_Fixes` I redid it only on trials that actually ended (COMPLETED or TERMINATED).
+
+| | All registered | Finished only |
+|---|---|---|
+| Phase 3 | 20.0% | 26.8% |
+| All trials | 7.41% | 12.2% |
+
+Phase 3 is still the worst in both. A chi-square test on finished trials shows that termination rate really depends on phase (p < 0.001), so the difference is not just chance.
+
+The counts are slightly different from the original analysis (4,100 trials now vs 4,092) because the data was downloaded again and new trials had been registered.
+
 ## Data
 - **Source:** [ClinicalTrials.gov API v2](https://clinicaltrials.gov/data-api/api), all trials with Alzheimer's as a condition
 - **Size:** 4,092 trials, downloaded in November 2026 (the numbers change as new trials get registered)
@@ -58,7 +70,8 @@ clinical-trials-explorer/
 │   ├── 03_data_quality.ipynb
 │   ├── 04_status_phase.ipynb
 │   ├── 05_why_stopped.ipynb
-│   └── 06_charts.ipynb
+│   ├── 06_charts.ipynb
+│   └── 07_Fixes.ipynb
 ├── src/
 │   ├── download.py       # downloads all trials from the API
 │   ├── flatten.py        # turns the JSON into a table
@@ -77,7 +90,7 @@ pip install -r requirements.txt
 ```
 Then run the notebooks in order, starting from `01` (it downloads the data) and `02` (it builds the table the others use).
 
-**Built with:** Python, pandas, matplotlib, requests
+**Built with:** Python, pandas, matplotlib, scipy, requests
 
 ## Limitations
 - The reasons for stopping are free text, so they were sorted with keyword matching. 29% still end up as "other" and reasons written indirectly get missed, so efficacy and safety are probably undercounted.
