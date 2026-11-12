@@ -27,7 +27,7 @@ Efficacy grows as a reason from Phase 1 to Phase 3, where it's the most common n
 More charts: [status of all trials](figures/01_status.png) and [trials per phase](figures/02_phases.png).
 
 ## Fixes: stricter termination rates
-Originally I calculated termination rates over every registered trial, including ones that are still running and haven't had the chance to stop yet. In `07_Fixes` I redid it only on trials that actually ended (COMPLETED or TERMINATED).
+Originally I calculated termination rates over every registered trial, including ones that are still running and haven't had the chance to stop yet. In `07_fixes` I redid it only on trials that actually ended (COMPLETED or TERMINATED).
 
 | | All registered | Finished only |
 |---|---|---|
@@ -71,7 +71,7 @@ clinical-trials-explorer/
 │   ├── 04_status_phase.ipynb
 │   ├── 05_why_stopped.ipynb
 │   ├── 06_charts.ipynb
-│   └── 07_Fixes.ipynb
+│   └── 07_fixes.ipynb
 ├── src/
 │   ├── download.py       # downloads all trials from the API
 │   ├── flatten.py        # turns the JSON into a table
